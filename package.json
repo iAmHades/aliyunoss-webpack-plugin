@@ -1,0 +1,20 @@
+{
+  "name": "aliyunoss-webpack-plugin",
+  "description": "when build ,it can auto update static resources to aliyun oss",
+  "author": "hades",
+  "keywords": [
+    "front-end",
+    "web",
+    "webpack",
+    "plugin",
+    "building tool"
+  ],
+  "scripts": {},
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "ali-oss": "^4.1.4",
+    "co":"4.6.0"
+  }
+}
