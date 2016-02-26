@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "ali-oss": "^4.1.4",
-    "co":"4.6.0"
+    "co":"4.6.0",
+    "lodash":"4.5.1"
   }
 }
