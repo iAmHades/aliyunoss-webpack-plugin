@@ -1,7 +1,14 @@
 {
   "name": "aliyunoss-webpack-plugin",
+  "version":"0.0.1",
+  "main": "index.js",
   "description": "when build ,it can auto update static resources to aliyun oss",
   "author": "hades",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:iAmHades/aliyunoss-webpack-plugin.git"
+  },
   "keywords": [
     "front-end",
     "web",
