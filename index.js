@@ -3,6 +3,7 @@ var path = require('path');
 var fs = require('fs');
 var oss = require('ali-oss');
 var co = require('co');
+var _ = require('lodash');
 
 function AliyunossWebpackPlugin(options) {
 	this.options = _.extend({
