@@ -4,8 +4,12 @@ var fs = require('fs');
 var oss = require('ali-oss');
 var co = require('co');
 var _ = require('lodash');
+var rd = require('rd');
+var colors = require('colors');
+
 
 function AliyunossWebpackPlugin(options) {
+	this.fileArray = [];
 	this.options = _.extend({
 		queueSize: 10
 	}, options);
@@ -14,7 +18,7 @@ function AliyunossWebpackPlugin(options) {
 AliyunossWebpackPlugin.prototype.apply = function(compiler) {
 	var _this = this;
 	compiler.plugin("done", function(compilation) {
-	        _this.oposs();
+		_this.oposs();
 	});
 };
 
@@ -40,17 +44,13 @@ AliyunossWebpackPlugin.prototype.oposs = function() {
 			});
 		}
 		//上传oss的新代码
-		files = _this.getFiles(_this.options.buildPath);
+		_this.getFiles(_this.options.buildPath);
 		var j = 0;
-		for (var i = 0; i < files.length; i++) {
-			if (j < _this.options.queueSize) {
-				var file = files[i];
-				var fileName = file.split('/').pop();
-				yield store.put(fileName, files[i]);
-				j++;
-			} else {
-				j = 0;
-			}
+		for (var i = 0; i < _this.fileArray.length; i++) {
+			var file = _this.fileArray[i];
+			var fileName = file.split('/').pop();
+			yield store.put(fileName, file);
+			console.log(file + '-- upload success'.green);
 		}
 	}).catch(function(err) {
 		console.info(err)
@@ -58,6 +58,7 @@ AliyunossWebpackPlugin.prototype.oposs = function() {
 }
 
 AliyunossWebpackPlugin.prototype.getFiles = function(filePath) {
+	var _this = this;
 	var suffix = {
 		jpg: true,
 		png: true,
@@ -65,18 +66,20 @@ AliyunossWebpackPlugin.prototype.getFiles = function(filePath) {
 		css: true,
 		jpeg: true
 	};
-	var fileArray = [];
 	var files = fs.readdirSync(filePath);
 	var fss = [];
-	files.forEach(function(fileName) {
-		var fsplit = fileName.split('.');
-		if (fsplit.length > 1) {
-			if (suffix[fsplit[fsplit.length - 1]]) {
-				fileArray.push(filePath + '/' + fileName);
+	var files = rd.readSync(filePath);
+	files.forEach(function(filePath) {
+		var f = fs.statSync(filePath);
+		if (!f.isDirectory()) {
+			var fsplit = filePath.split('.');
+			if (fsplit.length > 1) {
+				if (suffix[fsplit.pop()]) {
+					_this.fileArray.push(filePath);
+				}
 			}
 		}
 	});
-	return fileArray;
 }
 
 module.exports = AliyunossWebpackPlugin;
