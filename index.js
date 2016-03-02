@@ -4,8 +4,8 @@ var fs = require('fs');
 var oss = require('ali-oss');
 var co = require('co');
 var _ = require('lodash');
-var rd = require('rd');
 var colors = require('colors');
+var fileUtils = require('./utils/file')
 
 
 function AliyunossWebpackPlugin(options) {
@@ -44,7 +44,9 @@ AliyunossWebpackPlugin.prototype.oposs = function() {
 			});
 		}
 		//上传oss的新代码
-		_this.getFiles(_this.options.buildPath);
+		fileUtils.eachFileSync(_this.options.buildPath, function(filename, stats) {
+			_this.fileArray.push(filename);
+		});
 		var j = 0;
 		for (var i = 0; i < _this.fileArray.length; i++) {
 			var file = _this.fileArray[i];
@@ -57,29 +59,5 @@ AliyunossWebpackPlugin.prototype.oposs = function() {
 	})
 }
 
-AliyunossWebpackPlugin.prototype.getFiles = function(filePath) {
-	var _this = this;
-	var suffix = {
-		jpg: true,
-		png: true,
-		js: true,
-		css: true,
-		jpeg: true
-	};
-	var files = fs.readdirSync(filePath);
-	var fss = [];
-	var files = rd.readSync(filePath);
-	files.forEach(function(filePath) {
-		var f = fs.statSync(filePath);
-		if (!f.isDirectory()) {
-			var fsplit = filePath.split('.');
-			if (fsplit.length > 1) {
-				if (suffix[fsplit.pop()]) {
-					_this.fileArray.push(filePath);
-				}
-			}
-		}
-	});
-}
 
 module.exports = AliyunossWebpackPlugin;
