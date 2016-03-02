@@ -3,15 +3,26 @@ var path = require('path');
 var fs = require('fs');
 var oss = require('ali-oss');
 var co = require('co');
-var _ = require('lodash');
 var colors = require('colors');
 var fileUtils = require('./utils/file')
+var _ = require('./utils/object')
 
 
 function AliyunossWebpackPlugin(options) {
+	if (!options || !options.buildPath || !options.region || !options.accessKeyId || !options.accessKeySecret || !options.bucket) {
+		console.info('Some parameters of the problem，please set as the follow:')
+		console.info(" new".red + " AliyunossWebpackPlugin({");
+		console.info("   buildPath:'your path',".yellow);
+		console.info("   region: 'your region',".yellow);
+		console.info("   accessKeyId: 'your accessKeyId',".yellow);
+		console.info("   accessKeySecret: 'your accessKeySecret',".yellow);
+		console.info("   bucket: 'your bucket'".yellow);
+		console.info(" })");
+		throw new Error('Some parameters of the problem')
+	}
 	this.fileArray = [];
 	this.options = _.extend({
-		queueSize: 10
+
 	}, options);
 }
 
@@ -52,7 +63,7 @@ AliyunossWebpackPlugin.prototype.oposs = function() {
 			var file = _this.fileArray[i];
 			var fileName = file.split('/').pop();
 			yield store.put(fileName, file);
-			console.log(file + '-- upload success'.green);
+			console.log(file + ' -- upload success'.green);
 		}
 	}).catch(function(err) {
 		console.info(err)
