@@ -40,3 +40,6 @@ The plugin allowed values are as follows:
 - `accessKeyId`: 阿里云的权限访问的key。
 - `accessKeySecret`: 阿里云的权限访问的secret。
 - `bucket`: 阿里云的权限访问的secret。
+- `deleteAll`: 先删除oss上的代码之后再上传，默认为false
+- `generateObjectPath`: 函数，传入上传的文件名，返回一个你想要的oss的文件名，默认是identity，这是给调用者一个机会去修改oss的路径，比如加一个前缀等
+- `getObjectHeaders`: 函数，传入上传的文件名，返回一个对象，里面是headers，具体可以参见ali-oss的文档
