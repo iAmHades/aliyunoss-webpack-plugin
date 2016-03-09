@@ -1,6 +1,6 @@
 {
   "name": "aliyunoss-webpack-plugin",
-  "version":"0.0.9",
+  "version":"0.2.0",
   "main": "index.js",
   "description": "when build ,it can auto update static resources to aliyun oss",
   "author": "hades",
