@@ -79,7 +79,7 @@ AliyunossWebpackPlugin.prototype.oposs = function() {
 		for (var i = 0; i < _this.fileArray.length; i++) {
 			var file = _this.fileArray[i];
 			var fileName = file.split('/').pop();
-			var ossFileName = generateObjectPath(fileName);
+			var ossFileName = generateObjectPath(fileName, file);
 			if (ossFileName) {
 				yield store.put(ossFileName, file, {
 					headers: getObjectHeaders(fileName)
