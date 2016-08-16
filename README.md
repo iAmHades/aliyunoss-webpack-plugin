@@ -66,7 +66,7 @@ The plugin allowed values are as follows:
 - `region`: oss的区域，如:oss-cn-shanghai。
 - `accessKeyId`: 阿里云的权限访问的key。
 - `accessKeySecret`: 阿里云的权限访问的secret。
-- `bucket`: 阿里云的权限访问的secret。
+- `bucket`: 阿里云OSS上的命名空间。
 - `deleteAll`: 先删除oss上的代码之后再上传，默认为false
 - `generateObjectPath`: 函数（可选），函数参数为上传的文件名，必须返回一个字符串作为文件名，默认为文件原名。通过该函数可以让使用者自定义上传的文件名或者修改oss的路径，比如加一个前缀等
 - `getObjectHeaders`: 函数（可选），函数参数为上传的文件名，返回设置的headers对象，默认为空，具体可以参见[ali-oss的文档](http://doc.oss.aliyuncs.com/#_Toc336676772)
