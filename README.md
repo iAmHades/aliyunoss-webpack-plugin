@@ -62,7 +62,7 @@ Configuration
 -------------
 The plugin allowed values are as follows:
 
-- `buildPath`: 需要上传的文件路径,支持整个文件夹的遍历。 
+- `buildPath`: 需要上传的文件路径,支持整个文件夹的遍历。支持node-glob风格路径，具体可以参见[node-glob的文档](https://github.com/isaacs/node-glob)。
 - `region`: oss的区域，如:oss-cn-shanghai。
 - `accessKeyId`: 阿里云的权限访问的key。
 - `accessKeySecret`: 阿里云的权限访问的secret。
@@ -70,3 +70,4 @@ The plugin allowed values are as follows:
 - `deleteAll`: 先删除oss上的代码之后再上传，默认为false
 - `generateObjectPath`: 函数（可选），函数参数为上传的文件名，必须返回一个字符串作为文件名，默认为文件原名。通过该函数可以让使用者自定义上传的文件名或者修改oss的路径，比如加一个前缀等
 - `getObjectHeaders`: 函数（可选），函数参数为上传的文件名，返回设置的headers对象，默认为空，具体可以参见[ali-oss的文档](http://doc.oss.aliyuncs.com/#_Toc336676772)
+- `internal`: 使用内网还是外网（可选），默认外网

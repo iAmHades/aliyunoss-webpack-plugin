@@ -53,7 +53,8 @@ AliyunossWebpackPlugin.prototype.oposs = function() {
 			region: _this.options.region,
 			accessKeyId: _this.options.accessKeyId,
 			accessKeySecret: _this.options.accessKeySecret,
-			bucket: _this.options.bucket
+			bucket: _this.options.bucket,
+			internal: _this.options.internal ? true : false,
 		});
 
 		//删除oss上代码
