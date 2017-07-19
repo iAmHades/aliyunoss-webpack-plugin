@@ -83,6 +83,7 @@ AliyunossWebpackPlugin.prototype.oposs = function() {
 			var ossFileName = generateObjectPath(fileName, file);
 			if (ossFileName) {
 				yield store.put(ossFileName, file, {
+					timeout: _this.options.timeout,
 					headers: getObjectHeaders(fileName)
 				});
 				console.log(file + ' -- upload to ' + ossFileName + ' success'.green);
